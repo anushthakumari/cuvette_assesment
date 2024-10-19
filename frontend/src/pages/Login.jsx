@@ -5,29 +5,28 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import Icon from "../components/Icon";
 
-import { requestEmailOtp, verifyEmailOtp } from "../apis/auth.apis"; // Assuming you have these APIs
+import { requestEmailOtp, verifyEmailOtp } from "../apis/auth.apis";
 import useUserContext from "../hooks/useUserContext";
 import routeNames from "../constants/routeNames";
 
 const Login = () => {
-	const [email, setEmail] = useState(""); // New state for email input
+	const [email, setEmail] = useState("");
 	const [emailOtp, setEmailOtp] = useState("");
-	const [isEmailOtpSent, setIsEmailOtpSent] = useState(false); // New state to check if OTP has been sent
+	const [isEmailOtpSent, setIsEmailOtpSent] = useState(false);
 	const [isEmailVerified, setIsEmailVerified] = useState(false);
 	const [error, setError] = useState("");
-	const [isEmailLoading, setIsEmailLoading] = useState(false); // Loading state for email verification
-	const [isOtpLoading, setIsOtpLoading] = useState(false); // Loading state for OTP sending
+	const [isEmailLoading, setIsEmailLoading] = useState(false);
+	const [isOtpLoading, setIsOtpLoading] = useState(false);
 
 	const navigate = useNavigate();
 	const { userData, setUserData } = useUserContext();
 
-	// Function to request OTP for email
 	const handleRequestEmailOtp = async () => {
 		setIsOtpLoading(true);
-		setError(""); // Reset error state
+		setError("");
 		try {
-			await requestEmailOtp({ email }); // API to request OTP
-			setIsEmailOtpSent(true); // OTP sent successfully
+			await requestEmailOtp({ email });
+			setIsEmailOtpSent(true);
 		} catch (err) {
 			setError("Failed to send OTP. Please try again.");
 			console.error(err);
@@ -36,19 +35,18 @@ const Login = () => {
 		}
 	};
 
-	// Function to verify the entered OTP
 	const handleEmailVerify = async () => {
-		setIsEmailLoading(true); // Set loading to true
-		setError(""); // Reset error state
+		setIsEmailLoading(true);
+		setError("");
 		try {
-			const data = await verifyEmailOtp({ email, otp: emailOtp }); // Verify OTP using email and OTP
+			const data = await verifyEmailOtp({ email, otp: emailOtp });
 			setUserData({ ...data.user, isVerified: true });
-			setIsEmailVerified(true); // OTP verified
+			setIsEmailVerified(true);
 		} catch (err) {
 			setError("Email verification failed.");
 			console.error(err);
 		} finally {
-			setIsEmailLoading(false); // Set loading to false after API call
+			setIsEmailLoading(false);
 		}
 	};
 

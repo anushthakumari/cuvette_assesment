@@ -67,10 +67,9 @@ const JobForm = () => {
 			return false;
 		}
 
-		// Validate end date
 		const selectedDate = new Date(formData.endDate);
 		const today = new Date();
-		today.setHours(0, 0, 0, 0); // Reset time to midnight for comparison
+		today.setHours(0, 0, 0, 0);
 
 		if (selectedDate < today) {
 			setError("End Date must be today or a future date");

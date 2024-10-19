@@ -15,15 +15,15 @@ const Verify = () => {
 	const [isEmailVerified, setIsEmailVerified] = useState(false);
 	const [isPhoneVerified, setIsPhoneVerified] = useState(false);
 	const [error, setError] = useState("");
-	const [isEmailLoading, setIsEmailLoading] = useState(false); // Loading state for email verification
-	const [isPhoneLoading, setIsPhoneLoading] = useState(false); // Loading state for phone verification
+	const [isEmailLoading, setIsEmailLoading] = useState(false);
+	const [isPhoneLoading, setIsPhoneLoading] = useState(false);
 
 	const navigate = useNavigate();
 	const { userData, setUserData } = useUserContext();
 
 	const handleEmailVerify = async () => {
-		setIsEmailLoading(true); // Set loading to true
-		setError(""); // Reset error state
+		setIsEmailLoading(true);
+		setError("");
 		try {
 			await verifyEmail({ otp: emailOtp });
 			setIsEmailVerified(true);
@@ -34,13 +34,13 @@ const Verify = () => {
 			setError("Email verification failed.");
 			console.error(err);
 		} finally {
-			setIsEmailLoading(false); // Set loading to false after API call
+			setIsEmailLoading(false);
 		}
 	};
 
 	const handlePhoneVerify = async () => {
-		setIsPhoneLoading(true); // Set loading to true
-		setError(""); // Reset error state
+		setIsPhoneLoading(true);
+		setError("");
 		try {
 			await verifyPhone({ otp: phoneOtp });
 			setIsPhoneVerified(true);
@@ -51,7 +51,7 @@ const Verify = () => {
 			setError("Phone verification failed.");
 			console.error(err);
 		} finally {
-			setIsPhoneLoading(false); // Set loading to false after API call
+			setIsPhoneLoading(false);
 		}
 	};
 
@@ -93,8 +93,7 @@ const Verify = () => {
 							<Button
 								className="w-full bg-blue-500 text-white py-2 rounded-lg mt-2"
 								onClick={handleEmailVerify}
-								disabled={isEmailLoading} // Disable button while loading
-							>
+								disabled={isEmailLoading}>
 								{isEmailLoading ? "Verifying..." : "Verify"}{" "}
 								{/* Show loading state */}
 							</Button>
@@ -114,8 +113,7 @@ const Verify = () => {
 							<Button
 								className="w-full bg-blue-500 text-white py-2 rounded-lg mt-2"
 								onClick={handlePhoneVerify}
-								disabled={isPhoneLoading} // Disable button while loading
-							>
+								disabled={isPhoneLoading}>
 								{isPhoneLoading ? "Verifying..." : "Verify"}{" "}
 								{/* Show loading state */}
 							</Button>

@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 import useUserData from "../hooks/useUserData";
-import routeNames from "../constants/RouteNames";
+import routeNames from "../constants/routeNames";
 
 const PublicOutlet = () => {
 	const user = useUserData();
